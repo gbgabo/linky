@@ -1,0 +1,20 @@
+{
+  "name": "linky",
+  "version": "1.0.0",
+  "description": "a linktree inspired page template",
+  "main": "server.js",
+  "scripts": {
+    "client": "cd client && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbgabo/linky.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbgabo/linky/issues"
+  },
+  "homepage": "https://github.com/gbgabo/linky#readme"
+}
