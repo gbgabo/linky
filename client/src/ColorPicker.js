@@ -2,7 +2,6 @@ import { SketchPicker } from 'react-color';
 import { useState } from 'react';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 // import { ClickAwayListener } from '@material-ui/core';
 
 function ColorPicker({ name, input, onChange }) {
