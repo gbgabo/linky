@@ -1,10 +1,11 @@
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { useState } from 'react';
+import { IconButton } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import { ClickAwayListener } from '@material-ui/core';
+import { ClickAwayListener } from '@material-ui/core';
 
-function ColorPicker({ name, input, onChange }) {
+export default function ColorPicker({ name, input, onChange }) {
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
     const useStyles = makeStyles((theme) => ({
@@ -38,23 +39,24 @@ function ColorPicker({ name, input, onChange }) {
     const classes = useStyles();
 
     return(
-        // <ClickAwayListener onClickAway={() => setDisplayColorPicker(false)}>
+        <ClickAwayListener onClickAway={() => setDisplayColorPicker(false)}>
         <div>
             <p>{name}</p>
             {/* Color Button */}
-            <div className={classes.swatch} onClick={() => setDisplayColorPicker(!displayColorPicker)}>
+            <IconButton aria-label="delete" onClick={() => setDisplayColorPicker(!displayColorPicker)}>
                 <div className={classes.color}/>
-            </div>
+            </IconButton>
+            {/* <div className={classes.swatch} onClick={() => setDisplayColorPicker(!displayColorPicker)}>
+                <div className={classes.color}/>
+            </div> */}
             {/* Color Picker */}
             { displayColorPicker ? (
                 <div className={classes.popover}>
                     <div className={classes.cover} onClick={() => setDisplayColorPicker(false)}/>
-                    <SketchPicker color={input} onChange={(color) => onChange(color.hex)} />
+                    <ChromePicker color={input} onChange={(color) => onChange(color.hex)} />
                 </div>
             ) : null }
         </div>
-        // </ClickAwayListener> 
+        </ClickAwayListener> 
     )
 }
-
-export default ColorPicker;

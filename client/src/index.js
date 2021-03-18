@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import history from './history' 
+import { Router, Route, Switch } from 'react-router-dom' 
+import Edit from './pages/Edit'
+import Page from './pages/Page'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router history={history}>
+        <Switch>
+          <Route path='/' exact component={Page}/>
+          <Route path='/edit' exact component={Edit}/>
+        </Switch>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

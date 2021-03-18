@@ -1,11 +1,11 @@
 import 'fontsource-roboto';
 import React from 'react';
 import { useState } from 'react';
-import profile from'./profile.png'
-import './App.css';
+import profile from'../profile.png'
+import '../css/App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { RawData } from './links';
+import { RawData } from '../links';
 
 
 export default function Page() {
