@@ -48,6 +48,12 @@ html, body {
   text-align: center;
 }
 
+.center {
+  margin: auto;
+  padding: 10px;
+  margin: 10px;
+}
+
 .App-header {
   min-height: 100vh;
   display: flex;

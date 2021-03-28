@@ -1,19 +1,22 @@
 import { ChromePicker } from 'react-color';
 import { useState } from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Grid, Button } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ClickAwayListener } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export default function ColorPicker({ name, input, onChange }) {
-    const [displayColorPicker, setDisplayColorPicker] = useState(false);
+    // input = 
+    const [displays, setDisplays] = useState((typeof input === 'string' ? [false]: []));
+    const [colors, setColors] = useState((typeof input === 'string' ? input.split(",") : input));
 
     const useStyles = makeStyles((theme) => ({
         color: {
             width: '30px',
             height: '30px',
             borderRadius: '50%',
-            background: `${input}`,
         },
         swatch: {
             padding: '5px',
@@ -36,27 +39,88 @@ export default function ColorPicker({ name, input, onChange }) {
         },
     }));
 
+    const updateColors = (newColor, position) => {
+        setColors(prevState => {
+            return prevState.map((color, index) => (index === position ? newColor : color ));
+        });
+        (typeof input === 'string'
+        ? onChange(newColor)
+        : onChange(prevState => {
+            return prevState.map((color, index) => (index === position ? newColor : color ));
+        })
+        )
+    };
+
+    const toggleDisplay = (position) => {
+        setDisplays(prevState => {
+            return prevState.map((display, index) => (index === position ? !display : display ));
+        });
+    }
+
+    const addColor = () => {
+        setColors(prevState => {
+            return [...prevState, "#240041"]
+        });
+        setDisplays(prevState => {
+            return [...prevState, false]
+        });
+        onChange(prevState => {
+            return [...prevState, "#240041"]
+        });
+    };
+
+    const removeColor = (position) => {
+        setColors(prevstate => {
+            return prevstate.filter((color, index) => index !== position);
+        });
+        setDisplays(prevstate => {
+            return prevstate.filter((display, index) => index !== position);
+        });
+        onChange(prevstate => {
+            return prevstate.filter((color, index) => index !== position);
+        });
+    }
+
     const classes = useStyles();
 
-    return(
-        <ClickAwayListener onClickAway={() => setDisplayColorPicker(false)}>
-        <div>
-            <p>{name}</p>
-            {/* Color Button */}
-            <IconButton aria-label="delete" onClick={() => setDisplayColorPicker(!displayColorPicker)}>
-                <div className={classes.color}/>
-            </IconButton>
-            {/* <div className={classes.swatch} onClick={() => setDisplayColorPicker(!displayColorPicker)}>
-                <div className={classes.color}/>
-            </div> */}
-            {/* Color Picker */}
-            { displayColorPicker ? (
-                <div className={classes.popover}>
-                    <div className={classes.cover} onClick={() => setDisplayColorPicker(false)}/>
-                    <ChromePicker color={input} onChange={(color) => onChange(color.hex)} />
-                </div>
-            ) : null }
-        </div>
-        </ClickAwayListener> 
+    return (
+        <Grid container spacing={1}>
+            {colors.map((color, index) => (
+            <div>
+                {/* <ClickAwayListener onClickAway={() => toggleDisplay(index)}> */}
+                <Grid item>
+                    
+                        {/* Color Button */}
+                        <IconButton aria-label="color" onClick={() => toggleDisplay(index)}>
+                            <div className={classes.color} style={{background: color}}/>
+                        </IconButton>
+                        {/* Color Picker */}
+                        { displays[index] ? (
+                            <div className={classes.popover}>
+                                <div className={classes.cover} onClick={() => toggleDisplay(index)}/>
+                                <ChromePicker color={color} onChange={(color) => updateColors(color.hex, index)} />
+                            </div>
+                        ) : null }
+                    
+                </Grid>
+                {/* </ClickAwayListener> */}
+                {index > 0 && (
+                <Grid item>
+                    <IconButton aria-label="delete" onClick={() => removeColor(index)}>
+                        <ClearIcon/>
+                    </IconButton>
+                </Grid>
+                ) }
+            </div>
+            ))}
+            { typeof input !== 'string' && (
+            <Grid item>
+                <Button aria-label="add" onClick={addColor}>
+                    { colors.length === 1 ? name : <AddIcon/> }
+                </Button>  
+            </Grid>
+            )}
+            
+        </Grid>
     )
 }

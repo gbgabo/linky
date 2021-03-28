@@ -1,9 +1,8 @@
 import React from 'react'
 import { Box, Typography } from '@material-ui/core'
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
+function TabPanel({ children, value, index, ...other }) {
+    
     return (
         <div
         role="tabpanel"

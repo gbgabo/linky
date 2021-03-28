@@ -1,22 +1,18 @@
 {
     "RawData": [
       {
-        "_id": "6015a6a28202c53a8ac1cfb7",
         "name": "Whatsapp",
         "address": "https://web.whatsapp.com"
       },
       {
-        "_id": "6015a6a28202c53a8ac1cfb8",
         "name": "Reddit",
         "address": "https://reddit.com"
       },
       {
-        "_id": "6015a6a28202c53a8ac1cfb9",
         "name": "Github",
         "address": "https://github.com/gbgabo"
       },
       {
-        "_id": "6015a6a28202c53a8ac1cf10",
         "name": "Menes",
         "address": "https://google.com"
       }
