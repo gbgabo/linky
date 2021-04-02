@@ -36,7 +36,7 @@ export default function LinkEditor({ links, onChange }) {
                 {links.map((link, index) => (
                     <Paper elevation={3} className="center">
                         <Grid container spacing={1}>
-                            <Grid style={{margin: 'auto'}}>
+                            <Grid item xs={1} style={{margin: 'auto'}}>
                                 <IconButton aria-label="delete" onClick={() => removeLink(index)}>
                                     <LinkIcon/>
                                 </IconButton>

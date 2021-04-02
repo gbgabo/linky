@@ -6,64 +6,66 @@ import ColorPicker from '../components/ColorPicker';
 
 export default function Customize({ styles, onChange }) {
 
-  const handleProfileChange = (event, value) => {
+  function handleStyle(selector, property, value){
     onChange(prevState => {
-      return ({...prevState, profile:{...prevState.profile, borderRadius: `${value}%`}})
+      return ({...prevState, [selector]:{...prevState[selector], [property]: value}})
     });
-  };
+  }
 
-  const handleButtonChange = (event, value) => {
+  function handleBackgroundChange(value){
+    console.log(`No customize: ${value}`)
+    let backgroundStyle
+    (typeof value === 'string' 
+    ? backgroundStyle = '--bg-colors'
+    : backgroundStyle = 'linear-gradient(var(--gradient-angle), var(--bg-colors))'
+    )
     onChange(prevState => {
-      return ({...prevState, button:{...prevState.button, borderRadius: value}})
-    });
+      return ({...prevState, page:{...prevState.page, '--bg-colors': value, background: backgroundStyle} })
+    })
+    
   };
-
-  // const handleGradientChange = (event, value) => {
-  //     setGradientAngle(`${value}deg`);
-  //     console.log(gradientAngle)
-  // };
 
   function valuetext(value) {
-  return (`${value}%`);
+    return (`${value}%`);
   };
 
     return (
         <div>
             <Grid container spacing={1}>
-              {/* <Grid item xs={1}>
+              <Grid item xs={1}>
                 <ColorPicker
                   name="Button color"
                   input={styles.button.background}
-                  onChange={setButtonColor}
+                  onChange={(value) => handleStyle('button', 'background', value)}
                 />
-              </Grid> */}
+              </Grid>
             
               {/* <Grid item xs={1}> */}
-                {/* <ColorPicker 
+                <ColorPicker 
                   name="Gradient"
-                  input={backgroundColors}
-                  onChange={setBackgroundColors}
+                  input={styles.page['--bg-colors']}
+                  onChange={handleBackgroundChange}
                 />
                 <Slider
                     defaultValue={30}
                     getAriaValueText={valuetext}
-                    onChange={handleGradientChange}
+                    onChange={(e,value) => handleStyle('page', '--gradient-angle', `${value}deg`)}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
                     step={5}
                     marks
                     min={0}
                     max={360}
-                /> */}
+                />
               {/* </Grid> */}
             
-              {/* <Grid item xs={1}>
+              <Grid item xs={1}>
                 <ColorPicker 
                   name="Text color"
-                  input={textColor}
-                  onChange={setTextColor}
+                  input={styles.button.color}
+                  onChange={(value) => handleStyle('button', 'color', value)}
                 />
-              </Grid> */}
+              </Grid>
 
               <Grid container spacing={1}>
                 <Grid item xs={2} style={{margin: 'auto'}}>
@@ -76,7 +78,7 @@ export default function Customize({ styles, onChange }) {
                   <Slider
                     defaultValue={50}
                     getAriaValueText={valuetext}
-                    onChange={handleProfileChange}
+                    onChange={(e,value) => handleStyle('profile', 'borderRadius', `${value}%`)}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
                     step={5}
@@ -100,7 +102,7 @@ export default function Customize({ styles, onChange }) {
                   <Slider
                     defaultValue={30}
                     getAriaValueText={valuetext}
-                    onChange={handleButtonChange}
+                    onChange={(e,value) => handleStyle('button', 'borderRadius', value)}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
                     step={2}

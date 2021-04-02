@@ -1,5 +1,5 @@
 import { ChromePicker } from 'react-color';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton, Grid, Button } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,9 +8,12 @@ import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 
 export default function ColorPicker({ name, input, onChange }) {
-    // input = 
-    const [displays, setDisplays] = useState((typeof input === 'string' ? [false]: []));
+    const [displays, setDisplays] = useState((typeof input === 'string' ? [false] : []));
     const [colors, setColors] = useState((typeof input === 'string' ? input.split(",") : input));
+
+    useEffect(() => {
+        console.log(`No picker: ${colors}`)
+    }, [colors])
 
     const useStyles = makeStyles((theme) => ({
         color: {
@@ -39,15 +42,15 @@ export default function ColorPicker({ name, input, onChange }) {
         },
     }));
 
+    const classes = useStyles();
+
     const updateColors = (newColor, position) => {
         setColors(prevState => {
             return prevState.map((color, index) => (index === position ? newColor : color ));
         });
         (typeof input === 'string'
         ? onChange(newColor)
-        : onChange(prevState => {
-            return prevState.map((color, index) => (index === position ? newColor : color ));
-        })
+        : onChange(colors)
         )
     };
 
@@ -64,9 +67,7 @@ export default function ColorPicker({ name, input, onChange }) {
         setDisplays(prevState => {
             return [...prevState, false]
         });
-        onChange(prevState => {
-            return [...prevState, "#240041"]
-        });
+        onChange(colors);
     };
 
     const removeColor = (position) => {
@@ -76,20 +77,15 @@ export default function ColorPicker({ name, input, onChange }) {
         setDisplays(prevstate => {
             return prevstate.filter((display, index) => index !== position);
         });
-        onChange(prevstate => {
-            return prevstate.filter((color, index) => index !== position);
-        });
+        onChange(colors);
     }
-
-    const classes = useStyles();
 
     return (
         <Grid container spacing={1}>
             {colors.map((color, index) => (
             <div>
-                {/* <ClickAwayListener onClickAway={() => toggleDisplay(index)}> */}
                 <Grid item>
-                    
+                    {/* <ClickAwayListener onClickAway={() => toggleDisplay(index)}> */}
                         {/* Color Button */}
                         <IconButton aria-label="color" onClick={() => toggleDisplay(index)}>
                             <div className={classes.color} style={{background: color}}/>
@@ -101,9 +97,8 @@ export default function ColorPicker({ name, input, onChange }) {
                                 <ChromePicker color={color} onChange={(color) => updateColors(color.hex, index)} />
                             </div>
                         ) : null }
-                    
+                    {/* </ClickAwayListener> */}
                 </Grid>
-                {/* </ClickAwayListener> */}
                 {index > 0 && (
                 <Grid item>
                     <IconButton aria-label="delete" onClick={() => removeColor(index)}>

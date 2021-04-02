@@ -2,12 +2,14 @@
    "RawStyles": 
    { 
        "page": {
+            "--bg-colors": ["#900048", "#240041"],
+            "--gradient-angle": "90deg",
             "minHeight": "100vh",
             "display": "flex",
             "flexDirection": "column",
             "alignItems": "center",
             "justifyContent": "center",
-            "background": "#900048"
+            "background": "linear-gradient(var(--gradient-angle), var(--bg-colors))"
         },
         "profile": {
             "marginBottom": "50px", 

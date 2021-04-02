@@ -5,16 +5,12 @@
         "address": "https://web.whatsapp.com"
       },
       {
-        "name": "Reddit",
-        "address": "https://reddit.com"
-      },
-      {
         "name": "Github",
         "address": "https://github.com/gbgabo"
       },
       {
-        "name": "Menes",
-        "address": "https://google.com"
+        "name": "About Linky",
+        "address": "https://github.com/gbgabo/linky"
       }
     ]
 }
