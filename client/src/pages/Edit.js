@@ -1,12 +1,12 @@
 import 'fontsource-roboto';
 import React from 'react';
-import { useEffect } from 'react';
 import '../css/App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, AppBar } from '@material-ui/core';
-import { RawData } from '../links';
-import { RawStyles } from '../styles';
-import LinkEditor from '../components/LinkEditor';
+import { RawData } from '../samples/links';
+import { RawStyles } from '../samples/styles';
+import Contents from '../components/Contents';
+import { Palette, FormatAlignCenter, Brush } from '@material-ui/icons'
 import TabPanel from '../components/TabPanel';
 import Customize from '../components/Customize';
 import Page from './Page';
@@ -16,10 +16,6 @@ export default function Edit() {
   const [tab, setTab] = React.useState(0);
   const [links, setLinks] = React.useState(RawData);
   const [styles, setStyles] = React.useState(RawStyles);
-
-  useEffect(() => {
-    console.log(styles) 
-  }, [styles])
 
   const useStyles = makeStyles((theme) => (styles));
 
@@ -36,14 +32,14 @@ export default function Edit() {
       <div className="split right">
         <AppBar position="static" color="default">
             <Tabs value={tab} onChange={handleTabChange} variant="fullWidth" aria-label="simple tabs example">
-            <Tab label="Links" />
-            <Tab label="Customize" />
-            <Tab label="Themes" />
+              <Tab icon={<FormatAlignCenter/>} label="Content" />
+              <Tab icon={<Brush/>} label="Appearance" />
+              <Tab icon={<Palette/>} label="Themes" />
             </Tabs>
         </AppBar>
         <TabPanel value={tab} index={0}>
             <div>
-                <LinkEditor links={links} onChange={setLinks}/>
+                <Contents links={links} onChange={setLinks}/>
             </div>
         </TabPanel>
         <TabPanel value={tab} index={1}>

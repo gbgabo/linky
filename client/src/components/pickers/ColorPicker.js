@@ -3,17 +3,18 @@ import { useState, useEffect } from 'react';
 import { IconButton, Grid, Button } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { ClickAwayListener } from '@material-ui/core';
+// import { ClickAwayListener } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 
-export default function ColorPicker({ name, input, onChange }) {
-    const [displays, setDisplays] = useState((typeof input === 'string' ? [false] : []));
-    const [colors, setColors] = useState((typeof input === 'string' ? input.split(",") : input));
+export default function ColorPicker({ label, addLabel, value, onChange }) {
+    const [displays, setDisplays] = useState((typeof value === 'string' ? [false] : value.map(() => {return false}) ));
+    const [colors, setColors] = useState((typeof value === 'string' ? value.split(",") : value));
 
     useEffect(() => {
-        console.log(`No picker: ${colors}`)
-    }, [colors])
+        console.log(`No picker: ${colors}`);
+        console.log(`Displays: ${displays}`);
+    }, [colors, displays])
 
     const useStyles = makeStyles((theme) => ({
         color: {
@@ -48,9 +49,12 @@ export default function ColorPicker({ name, input, onChange }) {
         setColors(prevState => {
             return prevState.map((color, index) => (index === position ? newColor : color ));
         });
-        (typeof input === 'string'
+        (typeof value === 'string'
         ? onChange(newColor)
-        : onChange(colors)
+        : setColors((state) => {
+            onChange(state);
+            return state;
+        })
         )
     };
 
@@ -67,7 +71,11 @@ export default function ColorPicker({ name, input, onChange }) {
         setDisplays(prevState => {
             return [...prevState, false]
         });
-        onChange(colors);
+        setColors((state) => {
+            onChange(state);
+            return state;
+        })
+       
     };
 
     const removeColor = (position) => {
@@ -77,11 +85,22 @@ export default function ColorPicker({ name, input, onChange }) {
         setDisplays(prevstate => {
             return prevstate.filter((display, index) => index !== position);
         });
-        onChange(colors);
+        setColors((state) => {
+            onChange(state);
+            return state;
+        })
     }
 
     return (
-        <Grid container spacing={1}>
+        <Grid
+            container 
+            direction="row"
+            alignItems={colors.length === 1 ? "center" : null}
+            spacing={1}
+        >
+            <Grid item>
+                <p>{label}</p>
+            </Grid>
             {colors.map((color, index) => (
             <div>
                 <Grid item>
@@ -108,10 +127,10 @@ export default function ColorPicker({ name, input, onChange }) {
                 ) }
             </div>
             ))}
-            { typeof input !== 'string' && (
+            { typeof value !== 'string' && (
             <Grid item>
                 <Button aria-label="add" onClick={addColor}>
-                    { colors.length === 1 ? name : <AddIcon/> }
+                    { colors.length === 1 ? addLabel : <AddIcon/> }
                 </Button>  
             </Grid>
             )}

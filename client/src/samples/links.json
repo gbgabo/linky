@@ -1,0 +1,39 @@
+{
+    "RawData": [
+      {
+        "icon": "WhatsApp",
+        "type": "link",
+        "name": "Whatsapp",
+        "address": "https://web.whatsapp.com"
+      },
+      {
+        "icon": "GitHub",
+        "name": "Section",
+        "type": "section"
+      },
+      {
+        "icon": "GitHub",
+        "name": "Sobre mim",
+        "type": "panel",
+        "details": "Aqui tem texto!"
+      },
+      {
+        "icon": "GitHub",
+        "type": "link",
+        "name": "Github",
+        "address": "https://github.com/gbgabo"
+      },
+      {
+        "icon": "Info",
+        "type": "link",
+        "name": "About Linky",
+        "address": "https://github.com/gbgabo/linky"
+      },
+      {
+        "icon": "GitHub",
+        "name": "Sobre mim",
+        "type": "panel",
+        "details": "Aqui tem texto!"
+      }
+    ]
+}
