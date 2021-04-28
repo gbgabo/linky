@@ -1,58 +1,71 @@
 import 'fontsource-roboto';
 import React from 'react';
+import { Fragment } from 'react';
+import { Button, Accordion, AccordionSummary, AccordionDetails, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Icons from '@material-ui/icons'
-import profile from'../samples/profile.png'
-import '../css/App.css';
-import { Button } from '@material-ui/core';
-import { RawData } from '../samples/links';
-import { RawStyles } from '../samples/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import { ExpandMore } from '@material-ui/icons';
+import profile from'../samples/profile.png'
+import * as data from '../samples/data';
+import '../css/App.css';
 
-const useStyles = makeStyles((theme) => (RawStyles));
+const useStyles = makeStyles((theme) => (data.styles));
 
-export default function Page({ style = useStyles , links = RawData }) {
+export default function Page({ contents = data.contents, styles = useStyles }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const classes = style();
+    const classes = styles();
 
     return (
         <div className={classes.page}>
-            <img className={classes.profile} alt="your profile" src={profile}/>
-            
-            {links.map((link, index) => {
-                let DynamicIcon = Icons[link.icon]
-                let content
-                content = link.type === 'section' ? <p className={classes.section}>{link.name}</p>: content;
-                content = link.type === 'panel' ? <Accordion className={classes.panel} square={false} expanded={expanded === index} onChange={handleChange(index)}>
-                                                    <AccordionSummary
-                                                    classes={{ root: classes.['panel-details'], content: classes.content}}
-                                                    expandIcon={<ExpandMore/>}
-                                                    aria-controls="panel1a-content"
-                                                    id="panel1a-header"
-                                                    >
-                                                        <Typography className={classes.startIcon}><DynamicIcon/></Typography>
-                                                        <Typography className={classes.heading}>{link.name}</Typography>
-                                                    </AccordionSummary>
-                                                    <AccordionDetails>
-                                                        <p>{link.details}</p>
-                                                    </AccordionDetails>
-                                                </Accordion> : content;
-                content = link.type === 'link' ? <Button key={link._id} className={classes.button} variant="contained" href={link.address} startIcon={<DynamicIcon/> }>{link.name}</Button> : content;
+            <img className={classes.profile} alt="profile" src={profile}/>
+            <p className={classes['profile-text']}>@gb_gabo</p>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={1}
+            >
+            {contents.map((content, index) => {
+                let DynamicIcon = content.icon === 'none' ? null : Icons[content.icon]
+                let contentElement
+                contentElement = content.type === 'section' ? 
+                    <Fragment>
+                        { content.icon === 'none' ? null : <Typography className={classes.startIcon}><DynamicIcon/></Typography> }
+                        <p className={classes.section}>{content.name}</p>
+                    </Fragment> : contentElement;
+                contentElement = content.type === 'panel' ?
+                    <Accordion className={classes.panel} square={false} expanded={expanded === index} onChange={handleChange(index)}>
+                        <AccordionSummary
+                        classes={{ root: classes['panel-details'], content: classes.content}}
+                        expandIcon={<ExpandMore/>}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        >
+                            { content.icon === 'none' ? null : <Typography className={classes.startIcon}><DynamicIcon/></Typography> }
+                            <Typography className={classes.heading}>{content.name}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <p>{content.details}</p>
+                        </AccordionDetails>
+                    </Accordion> : contentElement;
+                contentElement = content.type === 'link' ?
+                    <Button key={content._id} classes={{ root: classes.button, startIcon: classes.startIcon, label: classes.label}} size="medium" href={content.address} startIcon={DynamicIcon !== null && <DynamicIcon/> }>
+                        {content.name}
+                    </Button> : contentElement;
        
                 return ( 
-                    content      
+                    <Grid item>
+                        {contentElement}
+                    </Grid>     
                 )
-            })
-            }
+            })}
+            </Grid>
         </div>
     )
 }

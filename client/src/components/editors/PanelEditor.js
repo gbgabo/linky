@@ -3,7 +3,7 @@ import { TextField, Paper, IconButton, Grid } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete'
 import { IconPicker } from '../pickers';
 
-export default function PanelEditor({link, index, onChange, onRemove}) {
+export default function PanelEditor({content, index, onChange, onRemove}) {
 
     return (
         <div>
@@ -15,14 +15,14 @@ export default function PanelEditor({link, index, onChange, onRemove}) {
                     spacing={1}
                 >
                     <Grid item xs={1}> 
-                        <IconPicker value={link.icon} onChange={(icon) => onChange(icon, index, 'icon')}/>
+                        <IconPicker value={content.icon} onChange={(icon) => onChange(icon, index, 'icon')}/>
                     </Grid>
                     <Grid item xs={4}>
                         <TextField 
                             label="Title" 
-                            name={link.name} 
+                            name={content.name} 
                             variant="outlined" 
-                            value={link.name} 
+                            value={content.name} 
                             onChange={(e) => onChange(e.target.value, index, 'name')}
                             fullWidth                            
                         />
@@ -31,7 +31,7 @@ export default function PanelEditor({link, index, onChange, onRemove}) {
                         <TextField
                             label="Details"
                             variant="outlined"
-                            value={link.details}
+                            value={content.details}
                             onChange={(e) => onChange(e.target.value, index, 'details')}
                             fullWidth
                         />

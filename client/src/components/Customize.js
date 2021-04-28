@@ -1,11 +1,7 @@
 import React from 'react'
 import { gradientButton, flatButton, materialButton } from '../samples/templates';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button,Typography, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import { ExpandMore, Person, Palette, Storage, CropOriginal, Info } from '@material-ui/icons';
 import { SectionStyler, ButtonStyler, BackgroundStyler, ProfileStyler } from './stylers';
 
@@ -16,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+    display: "flex",
+    alignItems: "center",
     flexBasis: '6%'
   },
 }));

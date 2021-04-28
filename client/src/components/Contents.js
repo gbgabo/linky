@@ -1,16 +1,16 @@
 import React from 'react'
-import { IconButton, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
 import PlaylistAdd from '@material-ui/icons/PlaylistAdd';
 import PostAdd from '@material-ui/icons/PostAdd';
 import { LinkEditor, PanelEditor, SectionEditor } from './editors';
 import '../css/App.css';
 
-export default function Contents({ links, onChange }) {
+export default function Contents({ contents, onChange }) {
 
     const handleContentChange = (value, id, type) => {
         onChange(prevState => {
-          return prevState.map((link, index) => (index === id ? {...link, [type]: value} : link))
+          return prevState.map((content, index) => (index === id ? {...content, [type]: value} : content))
         });
     };
 
@@ -28,21 +28,21 @@ export default function Contents({ links, onChange }) {
     
     const removeContent = (id) => {
         onChange(prevstate => {
-            return prevstate.filter((link, index) => index !== id);
+            return prevstate.filter((content, index) => index !== id);
         });
     }
       
     return (
         <div>
             <form noValidate autoComplete="off">
-                {links.map((link, index) => {
+                {contents.map((content, index) => {
                     let Editor
-                    Editor = link.type === 'section' ? SectionEditor: Editor;
-                    Editor = link.type === 'panel' ? PanelEditor : Editor;
-                    Editor = link.type === 'link' ? LinkEditor : Editor;
+                    Editor = content.type === 'section' ? SectionEditor: Editor;
+                    Editor = content.type === 'panel' ? PanelEditor : Editor;
+                    Editor = content.type === 'link' ? LinkEditor : Editor;
 
                     return (
-                        <Editor link={link} index={index} onChange={handleContentChange} onRemove={removeContent}/>
+                        <Editor content={content} index={index} onChange={handleContentChange} onRemove={removeContent}/>
                     )}
                 )}
                 <div>

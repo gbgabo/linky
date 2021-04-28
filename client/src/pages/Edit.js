@@ -3,19 +3,20 @@ import React from 'react';
 import '../css/App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, AppBar } from '@material-ui/core';
-import { RawData } from '../samples/links';
-import { RawStyles } from '../samples/styles';
-import Contents from '../components/Contents';
 import { Palette, FormatAlignCenter, Brush } from '@material-ui/icons'
+
+import * as data from '../samples/data';
+
+import Page from './Page';
 import TabPanel from '../components/TabPanel';
 import Customize from '../components/Customize';
-import Page from './Page';
+import Contents from '../components/Contents';
 
 
 export default function Edit() {
   const [tab, setTab] = React.useState(0);
-  const [links, setLinks] = React.useState(RawData);
-  const [styles, setStyles] = React.useState(RawStyles);
+  const [contents, setContents] = React.useState(data.contents);
+  const [styles, setStyles] = React.useState(data.styles);
 
   const useStyles = makeStyles((theme) => (styles));
 
@@ -26,7 +27,7 @@ export default function Edit() {
   return (
     <div>
       <div className="split left">
-        <Page style={useStyles} links={links}/>
+        <Page contents={contents} styles={useStyles}/>
       </div>
 
       <div className="split right">
@@ -39,7 +40,7 @@ export default function Edit() {
         </AppBar>
         <TabPanel value={tab} index={0}>
             <div>
-                <Contents links={links} onChange={setLinks}/>
+                <Contents contents={contents} onChange={setContents}/>
             </div>
         </TabPanel>
         <TabPanel value={tab} index={1}>

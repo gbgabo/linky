@@ -29,13 +29,13 @@ export default function IconPicker({value, onChange}) {
         });
     }
 
-    const DynamicIcon = Icons[value];
-    const AddIcon = Icons['AddPhotoAlternate'];
+    // const AddIcon = Icons['AddPhotoAlternate'];
+    const DynamicIcon = value === 'none' ? Icons['AddPhotoAlternate'] : Icons[value];
 
     return (
         <div>
             <IconButton aria-label="icon" onClick={toggleModal}>
-                { value === null ? <AddIcon/> : <DynamicIcon/>}
+                <DynamicIcon/>
             </IconButton>
             <Modal open={open} onClose={toggleModal}>
                 <div>
@@ -47,7 +47,7 @@ export default function IconPicker({value, onChange}) {
                         spacing={1}
                     >
                         <DynamicIcon/>
-                        <Button>Remove</Button>
+                        <Button onClick={() => {onChange('none'); toggleModal()}}>Remove</Button>
                     </Grid>
                         {icons.map(icon => {
                             let LinkIcon = Icons[icon]
