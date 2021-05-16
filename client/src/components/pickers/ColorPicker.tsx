@@ -1,13 +1,19 @@
 import { ChromePicker } from 'react-color';
 import { useState, useEffect } from 'react';
-import { IconButton, Grid, Button } from '@material-ui/core';
+import { IconButton, Grid, Button, createStyles } from '@material-ui/core';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-// import { ClickAwayListener } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 
-export default function ColorPicker({ label, addLabel, value, onChange }) {
+interface ColorPickerProps {
+    label: string;
+    addLabel?: string;
+    value: string | string[];
+    onChange: (state: string | string[]) => void;
+}
+
+export default function ColorPicker({ label, addLabel, value, onChange }: ColorPickerProps) {
     const [displays, setDisplays] = useState((typeof value === 'string' ? [false] : value.map(() => {return false}) ));
     const [colors, setColors] = useState((typeof value === 'string' ? value.split(",") : value));
 
@@ -16,7 +22,7 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
         console.log(`Displays: ${displays}`);
     }, [colors, displays])
 
-    const useStyles = makeStyles((theme) => ({
+    const useStyles = makeStyles((theme: Theme) => createStyles({
         color: {
             width: '30px',
             height: '30px',
@@ -32,7 +38,7 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
         },
         popover: {
             position: 'absolute',
-            zIndex: '2',
+            zIndex: 2,
         },
         cover: {
             position: 'fixed',
@@ -45,7 +51,7 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
 
     const classes = useStyles();
 
-    const updateColors = (newColor, position) => {
+    const updateColors = (newColor: string, position: number) => {
         setColors(prevState => {
             return prevState.map((color, index) => (index === position ? newColor : color ));
         });
@@ -58,9 +64,9 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
         )
     };
 
-    const toggleDisplay = (position) => {
+    const toggleDisplay = (position: number) => {
         setDisplays(prevState => {
-            return prevState.map((display, index) => (index === position ? !display : display ));
+            return prevState.map((display: boolean, index: number) => (index === position ? !display : display ));
         });
     }
 
@@ -78,7 +84,7 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
        
     };
 
-    const removeColor = (position) => {
+    const removeColor = (position: number) => {
         setColors(prevstate => {
             return prevstate.filter((color, index) => index !== position);
         });
@@ -95,7 +101,6 @@ export default function ColorPicker({ label, addLabel, value, onChange }) {
         <Grid
             container 
             direction="row"
-            alignItems={colors.length === 1 ? "center" : null}
             spacing={1}
         >
             <Grid item>
