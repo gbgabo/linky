@@ -5,20 +5,20 @@ import { Button, Accordion, AccordionSummary, AccordionDetails, Grid, Typography
 import { makeStyles } from '@material-ui/core/styles';
 import * as Icons from '@material-ui/icons'
 import { ExpandMore } from '@material-ui/icons';
+
 import profile from'../samples/profile.png'
 import * as data from '../samples/data';
-import '../css/App.css';
 
-const useStyles = makeStyles((theme) => (data.styles));
-
-export default function Page({ contents = data.contents, styles = useStyles }) {
+export default function Page({ contents = data.contents, styles = data.styles }) {
     const [expanded, setExpanded] = React.useState(false);
+
+    const useStyles = makeStyles((theme) => (styles));
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const classes = styles();
+    const classes = useStyles();
 
     return (
         <div className={classes.page}>
@@ -36,8 +36,13 @@ export default function Page({ contents = data.contents, styles = useStyles }) {
                 let contentElement
                 contentElement = content.type === 'section' ? 
                     <Fragment>
-                        { content.icon === 'none' ? null : <Typography className={classes.startIcon}><DynamicIcon/></Typography> }
-                        <p className={classes.section}>{content.name}</p>
+                        { content.icon === 'none' ? null 
+                        : <Fragment>
+                            <Typography className={classes.startIcon}><DynamicIcon/></Typography>
+                            <Typography> <p className={classes.section}>{content.name}</p></Typography>
+                            </Fragment>
+                        }
+                        
                     </Fragment> : contentElement;
                 contentElement = content.type === 'panel' ?
                     <Accordion className={classes.panel} square={false} expanded={expanded === index} onChange={handleChange(index)}>

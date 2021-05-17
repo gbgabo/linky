@@ -1,7 +1,6 @@
 import 'fontsource-roboto';
 import React from 'react';
 import '../css/App.css';
-import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, AppBar } from '@material-ui/core';
 import { Palette, FormatAlignCenter, Brush } from '@material-ui/icons'
 
@@ -18,8 +17,6 @@ export default function Edit() {
   const [contents, setContents] = React.useState(data.contents);
   const [styles, setStyles] = React.useState(data.styles);
 
-  const useStyles = makeStyles((theme) => (styles));
-
   const handleTabChange = (event, newValue) => {
           setTab(newValue);
   };
@@ -27,7 +24,7 @@ export default function Edit() {
   return (
     <div>
       <div className="split left">
-        <Page contents={contents} styles={useStyles}/>
+        <Page contents={contents} styles={styles}/>
       </div>
 
       <div className="split right">
