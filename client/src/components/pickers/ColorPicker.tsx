@@ -101,6 +101,7 @@ export default function ColorPicker({ label, addLabel, value, onChange }: ColorP
         <Grid
             container 
             direction="row"
+            alignItems="center"
             spacing={1}
         >
             <Grid item>
