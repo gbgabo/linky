@@ -1,8 +1,9 @@
-html, body {
+/* html,
+body {
   height: 100%;
   margin: 0;
-}
-
+} */
+/* 
 .App {
   text-align: center;
 }
@@ -16,7 +17,7 @@ html, body {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 /* Split the screen in half */
 .split {
@@ -54,7 +55,7 @@ html, body {
   margin: 10px;
 }
 
-.App-header {
+/* .App-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -64,13 +65,4 @@ html, body {
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */
