@@ -3,19 +3,19 @@ import { TextField, Paper, IconButton, Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconPicker } from "../pickers";
 
-interface LinkEditorProps {
-  content: { icon: string; name: string; address?: string };
+interface PanelEditorProps {
+  content: { icon: string; name: string; details?: string };
   index: number;
   onChange: (value: string, index: number, type: string) => void;
   onRemove: (index: number) => void;
 }
 
-export default function LinkEditor({
+export default function PanelEditor({
   content,
   index,
   onChange,
   onRemove,
-}: LinkEditorProps) {
+}: PanelEditorProps) {
   return (
     <div>
       <Paper elevation={3} className="center">
@@ -23,12 +23,12 @@ export default function LinkEditor({
           <Grid item xs={1}>
             <IconPicker
               value={content.icon}
-              onChange={(icon: string) => onChange(icon, index, "icon")}
+              onChange={(icon) => onChange(icon, index, "icon")}
             />
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label="Name"
+              label="Title"
               name={content.name}
               variant="outlined"
               value={content.name}
@@ -38,10 +38,10 @@ export default function LinkEditor({
           </Grid>
           <Grid item xs={6}>
             <TextField
-              label="Address"
+              label="Details"
               variant="outlined"
-              value={content.address}
-              onChange={(e) => onChange(e.target.value, index, "address")}
+              value={content.details}
+              onChange={(e) => onChange(e.target.value, index, "details")}
               fullWidth
             />
           </Grid>
