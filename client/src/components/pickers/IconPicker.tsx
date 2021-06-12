@@ -61,7 +61,7 @@ export default function IconPicker({ value, onChange }: IconPickerProps) {
               alignItems="center"
               spacing={1}
             >
-              <DynamicIcon />
+              <Icon>{DynamicIcon}</Icon>
               <Button
                 onClick={() => {
                   onChange("none");
