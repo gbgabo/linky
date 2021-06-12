@@ -8,16 +8,15 @@
       "address": "https://web.whatsapp.com"
     },
     {
+      "icon": "info",
+      "name": "Sobre essa pagina",
+      "type": "section"
+    },
+    {
       "icon": "code",
       "name": "Sobre mim",
       "type": "panel",
       "details": "Aqui tem texto!"
-    },
-    {
-      "icon": "info",
-      "name": "Sobre essa pagina",
-      "type": "panel",
-      "details": "Criada com Linky"
     }
   ],
   "styles": {
