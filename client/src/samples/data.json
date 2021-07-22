@@ -1,5 +1,8 @@
 {
-  "profile": "profile_url",
+  "profile": {
+    "name": "@gb_gabo",
+    "image": "image_url"
+  },
   "contents": [
     {
       "icon": "call",
