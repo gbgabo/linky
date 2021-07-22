@@ -3,12 +3,7 @@ import { ClassNameMap } from "@material-ui/styles";
 import { Button, Icon } from "@material-ui/core";
 
 interface LinkProps {
-  content: {
-    icon: string;
-    name: string;
-    type: string;
-    address: string;
-  };
+  content: linkType;
   classes: ClassNameMap<any>;
 }
 

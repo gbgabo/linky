@@ -3,11 +3,7 @@ import { Typography, Icon } from "@material-ui/core";
 import { ClassNameMap } from "@material-ui/styles";
 
 interface SectionProps {
-  content: {
-    icon: string;
-    name: string;
-    type: "section";
-  };
+  content: sectionType;
   classes: ClassNameMap<any>;
 }
 
@@ -18,15 +14,13 @@ export default function Section({
   return (
     <Fragment>
       {content.icon === "none" ? null : (
-        <Fragment>
-          <Typography className={classes.startIcon}>
-            <Icon>{content.icon}</Icon>
-          </Typography>
-          <Typography>
-            <p className={classes.section}>{content.name}</p>
-          </Typography>
-        </Fragment>
+        <Typography className={classes.section}>
+          <Icon>{content.icon}</Icon>
+        </Typography>
       )}
+      <Typography>
+        <p className={classes.section}>{content.name}</p>
+      </Typography>
     </Fragment>
   );
 }

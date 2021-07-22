@@ -9,12 +9,7 @@ import {
 import { ClassNameMap } from "@material-ui/styles";
 
 interface PanelProps {
-  content: {
-    icon: string;
-    name: string;
-    type: "panel";
-    details: string;
-  };
+  content: panelType;
   classes: ClassNameMap<any>;
   expanded: boolean;
   onChange: (event: React.ChangeEvent<{}>, expanded: boolean) => void;
