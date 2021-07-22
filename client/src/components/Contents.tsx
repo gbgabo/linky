@@ -1,32 +1,31 @@
-import React, { ReactElement } from "react";
-import { Button } from "@material-ui/core";
+import React, { Fragment, ReactElement } from "react";
+import {
+  Button,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { ExpandMore, AlternateEmail } from "@material-ui/icons";
 import Add from "@material-ui/icons/Add";
 import PlaylistAdd from "@material-ui/icons/PlaylistAdd";
 import PostAdd from "@material-ui/icons/PostAdd";
 import { LinkEditor, PanelEditor, SectionEditor } from "./editors";
 import "../css/App.css";
 
-type linkType = {
-  icon: string;
-  name: string;
-  type: "link";
-  address: string;
-};
-
-type panelType = {
-  icon: string;
-  name: string;
-  type: "panel";
-  details: string;
-};
-
-type sectionType = {
-  icon: string;
-  name: string;
-  type: "section";
-};
-
-type contents = Array<linkType | panelType | sectionType>;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+    display: "flex",
+    alignItems: "center",
+    flexBasis: "6%",
+  },
+}));
 
 interface ContentsProps {
   contents: contents;
@@ -37,6 +36,8 @@ export default function Contents({
   contents,
   onChange,
 }: ContentsProps): ReactElement {
+  const classes = useStyles();
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const handleContentChange = (value: string, id: number, type: string) => {
     const updatedContents = contents.map((content, index) =>
       index === id ? { ...content, [type]: value } : content
@@ -59,7 +60,27 @@ export default function Contents({
   };
 
   return (
-    <div>
+    <Fragment>
+      <div className={classes.root}>
+        <Accordion
+          expanded={isExpanded}
+          onChange={() => setIsExpanded(!isExpanded)}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>
+              <AlternateEmail />
+            </Typography>
+            <Typography className={classes.heading}>Profile_info</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <p>menes</p>
+          </AccordionDetails>
+        </Accordion>
+      </div>
       <form noValidate autoComplete="off">
         {contents.map((content, index) => {
           let Editor = LinkEditor;
@@ -83,7 +104,7 @@ export default function Contents({
                 icon: "link",
                 name: "link",
                 type: "link",
-                address: "duckduckgo.com",
+                address: "http://duckduckgo.com",
               })
             }
             startIcon={<Add />}
@@ -119,6 +140,6 @@ export default function Contents({
           </Button>
         </div>
       </form>
-    </div>
+    </Fragment>
   );
 }
