@@ -23,4 +23,5 @@ type profileType = {
   image: string;
 };
 
-type contents = Array<linkType | panelType | sectionType>;
+type content = linkType | panelType | sectionType;
+type contents = Array<content>;
