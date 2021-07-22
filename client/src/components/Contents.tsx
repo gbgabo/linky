@@ -46,10 +46,7 @@ export default function Contents({
     onChange(updatedContents);
   };
 
-  const addContent = (
-    type: string,
-    newContent: linkType | panelType | sectionType
-  ) => {
+  const addContent = (type: string, newContent: content) => {
     const updatedContents = [...contents, newContent];
     onChange(updatedContents);
   };
@@ -74,10 +71,10 @@ export default function Contents({
             <Typography className={classes.heading}>
               <AlternateEmail />
             </Typography>
-            <Typography className={classes.heading}>Profile_info</Typography>
+            <Typography className={classes.heading}>Profile Info</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <p>menes</p>
+            <p>Config de perfil</p>
           </AccordionDetails>
         </Accordion>
       </div>
