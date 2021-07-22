@@ -12,33 +12,13 @@ import TabPanel from "../components/TabPanel";
 import Customize from "../components/Customize";
 import Contents from "../components/Contents";
 
-type linkType = {
-  icon: string;
-  name: string;
-  type: "link";
-  address: string;
-};
-
-type panelType = {
-  icon: string;
-  name: string;
-  type: "panel";
-  details: string;
-};
-
-type sectionType = {
-  icon: string;
-  name: string;
-  type: "section";
-};
-
-type contents = Array<linkType | panelType | sectionType>;
-
+let profileData = data.profile as profileType;
 let contentsData = data.contents as contents;
 let stylesData = data.styles as StyleRules<{}, string>;
 
 export default function Edit(): ReactElement {
   const [tab, setTab] = React.useState(0);
+  const [profile, setProfile] = React.useState(profileData);
   const [contents, setContents] = React.useState(contentsData);
   const [styles, setStyles] = React.useState(stylesData);
 
@@ -49,7 +29,7 @@ export default function Edit(): ReactElement {
   return (
     <div>
       <div className="split left">
-        <Page contents={contents} styles={styles} />
+        <Page profile={profile} contents={contents} styles={styles} />
       </div>
 
       <div className="split right">

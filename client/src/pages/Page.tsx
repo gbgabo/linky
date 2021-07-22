@@ -6,39 +6,19 @@ import { Link, Section, Panel } from "../components/contents";
 import { StyleRules } from "@material-ui/styles/withStyles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import profile from "../samples/profile.png";
+import profilePic from "../samples/profile.png";
 import * as data from "../samples/data.json";
-
-type linkType = {
-  icon: string;
-  name: string;
-  type: "link";
-  address: string;
-};
-
-type panelType = {
-  icon: string;
-  name: string;
-  type: "panel";
-  details: string;
-};
-
-type sectionType = {
-  icon: string;
-  name: string;
-  type: "section";
-};
-
-type contents = Array<linkType | panelType | sectionType>;
-
 interface PageProps {
+  profile: profileType;
   contents: contents;
   styles: StyleRules<{}, string>;
 }
 
+let profileData = data.profile as profileType;
 let contentsData = data.contents as contents;
 let stylesData = data.styles as StyleRules<{}, string>;
 export default function Page({
+  profile = profileData,
   contents = contentsData,
   styles = stylesData,
 }: PageProps): ReactElement {
@@ -54,8 +34,8 @@ export default function Page({
 
   return (
     <div className={classes.page}>
-      <img className={classes.profile} alt="profile" src={profile} />
-      <p className={classes["profile-text"]}>@gb_gabo</p>
+      <img className={classes.profile} alt="profile" src={profilePic} />
+      <p className={classes["profile-text"]}>{profile.name}</p>
       <Grid
         container
         direction="column"
