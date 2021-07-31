@@ -46,19 +46,18 @@ export default function Edit(): ReactElement {
           </Tabs>
         </AppBar>
         <TabPanel value={tab} index={0}>
-          <div>
-            <Contents contents={contents} onChange={setContents} />
-          </div>
+          <Contents
+            profile={profile}
+            contents={contents}
+            onChange={setContents}
+            onProfileChange={setProfile}
+          />
         </TabPanel>
         <TabPanel value={tab} index={1}>
-          <div>
-            <Customize styles={styles} onChange={setStyles} />
-          </div>
+          <Customize styles={styles} onChange={setStyles} />
         </TabPanel>
         <TabPanel value={tab} index={2}>
-          <div>
-            <p>Comming Soon...</p>
-          </div>
+          <p>Comming Soon...</p>
         </TabPanel>
       </div>
     </div>
