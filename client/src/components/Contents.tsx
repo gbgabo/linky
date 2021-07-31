@@ -1,43 +1,29 @@
 import React, { Fragment, ReactElement } from "react";
-import {
-  Button,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { ExpandMore, AlternateEmail } from "@material-ui/icons";
+import { Button } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
 import PlaylistAdd from "@material-ui/icons/PlaylistAdd";
 import PostAdd from "@material-ui/icons/PostAdd";
-import { LinkEditor, PanelEditor, SectionEditor } from "./editors";
+import {
+  LinkEditor,
+  PanelEditor,
+  SectionEditor,
+  ProfileEditor,
+} from "./editors";
 import "../css/App.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-    display: "flex",
-    alignItems: "center",
-    flexBasis: "6%",
-  },
-}));
-
 interface ContentsProps {
+  profile: profileType;
   contents: contents;
   onChange: (state: contents) => void;
+  onProfileChange: (profile: profileType) => void;
 }
 
 export default function Contents({
+  profile,
   contents,
   onChange,
+  onProfileChange,
 }: ContentsProps): ReactElement {
-  const classes = useStyles();
-  const [isExpanded, setIsExpanded] = React.useState(false);
   const handleContentChange = (value: string, id: number, type: string) => {
     const updatedContents = contents.map((content, index) =>
       index === id ? { ...content, [type]: value } : content
@@ -58,26 +44,8 @@ export default function Contents({
 
   return (
     <Fragment>
-      <div className={classes.root}>
-        <Accordion
-          expanded={isExpanded}
-          onChange={() => setIsExpanded(!isExpanded)}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>
-              <AlternateEmail />
-            </Typography>
-            <Typography className={classes.heading}>Profile Info</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <p>Config de perfil</p>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+      <ProfileEditor profile={profile} onChange={onProfileChange} />
+
       <form noValidate autoComplete="off">
         {contents.map((content, index) => {
           let Editor = LinkEditor;
