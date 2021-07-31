@@ -1,5 +1,5 @@
-import React, { ReactElement, Fragment } from "react";
-import { Typography, Icon } from "@material-ui/core";
+import React, { ReactElement } from "react";
+import { Typography, Icon, Grid } from "@material-ui/core";
 import { ClassNameMap } from "@material-ui/styles";
 
 interface SectionProps {
@@ -12,15 +12,25 @@ export default function Section({
   classes,
 }: SectionProps): ReactElement {
   return (
-    <Fragment>
-      {content.icon === "none" ? null : (
-        <Typography className={classes.section}>
-          <Icon>{content.icon}</Icon>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={2}
+    >
+      <Grid item>
+        {content.icon === "none" ? null : (
+          <Typography className={classes.section}>
+            <Icon>{content.icon}</Icon>
+          </Typography>
+        )}
+      </Grid>
+      <Grid item>
+        <Typography>
+          <p className={classes.section}>{content.name}</p>
         </Typography>
-      )}
-      <Typography>
-        <p className={classes.section}>{content.name}</p>
-      </Typography>
-    </Fragment>
+      </Grid>
+    </Grid>
   );
 }
