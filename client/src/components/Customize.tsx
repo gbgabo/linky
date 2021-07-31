@@ -26,6 +26,7 @@ import {
   ButtonStyler,
   BackgroundStyler,
   ProfileStyler,
+  PanelStyler,
 } from "./stylers";
 import { CSSProperties, StyleRules } from "@material-ui/styles/withStyles";
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
     display: "flex",
     alignItems: "center",
-    flexBasis: "6%",
+    flexBasis: "10%",
   },
 }));
 
@@ -136,6 +137,21 @@ export default function Customize({
       </Accordion>
 
       <Accordion expanded={expandedMenu === 5} onChange={handleChange(5)}>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>
+            <Storage />
+          </Typography>
+          <Typography className={classes.heading}>Panel</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <PanelStyler panel={styles.panel} onChange={handleStyle} />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expandedMenu === 6} onChange={handleChange(6)}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
           aria-controls="panel2a-content"
