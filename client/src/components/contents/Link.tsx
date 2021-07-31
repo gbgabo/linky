@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { ClassNameMap } from "@material-ui/styles";
-import { Button, Icon } from "@material-ui/core";
+import { Button, Icon, Typography } from "@material-ui/core";
 
 interface LinkProps {
   content: linkType;
@@ -10,17 +10,15 @@ interface LinkProps {
 export default function Link({ content, classes }: LinkProps): ReactElement {
   return (
     <Button
-      classes={{
-        root: classes.button,
-        startIcon: classes.startIcon,
-        label: classes.label,
-      }}
-      //   size="large"
+      classes={{ root: classes.button, label: classes.label }}
       href={content.address}
-      // startIcon={DynamicIcon !== null && <DynamicIcon />}
     >
-      <Icon>{content.icon}</Icon>
-      {content.name}
+      {content.icon === "none" ? null : (
+        <Typography className={classes.icon}>
+          <Icon>{content.icon}</Icon>
+        </Typography>
+      )}
+      <Typography>{content.name}</Typography>
     </Button>
   );
 }
