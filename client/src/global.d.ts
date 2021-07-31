@@ -20,6 +20,7 @@ type sectionType = {
 
 type profileType = {
   name: string;
+  address: string | undefined;
   image: string;
 };
 
