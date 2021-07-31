@@ -43,6 +43,7 @@ export default function PanelEditor({
               value={content.details}
               onChange={(e) => onChange(e.target.value, index, "details")}
               fullWidth
+              multiline
             />
           </Grid>
           <Grid item xs={1}>
