@@ -4,6 +4,7 @@ import "../css/App.css";
 import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { StyleRules } from "@material-ui/styles/withStyles";
 import { Palette, FormatAlignCenter, Brush } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 import * as data from "../samples/data.json";
 
@@ -16,6 +17,25 @@ let profileData = data.profile as profileType;
 let contentsData = data.contents as contents;
 let stylesData = data.styles as StyleRules<{}, string>;
 
+const useStyles = makeStyles((theme) => ({
+  split: {
+    height: "100%",
+    width: "50%",
+    position: "fixed",
+    zIndex: 1,
+    top: 0,
+    overflowX: "hidden",
+  },
+  left: {
+    left: 0,
+    backgroundColor: "#61dafb",
+  },
+  right: {
+    right: 0,
+    backgroundColor: "#f4f1de",
+  },
+}));
+
 export default function Edit(): ReactElement {
   const [tab, setTab] = React.useState(0);
   const [profile, setProfile] = React.useState(profileData);
@@ -25,14 +45,14 @@ export default function Edit(): ReactElement {
   const handleTabChange = (event: ChangeEvent<{}>, newValue: number) => {
     setTab(newValue);
   };
-
+  const classes = useStyles();
   return (
     <div>
-      <div className="split left">
+      <div className={`${classes.left} ${classes.split}`}>
         <Page profile={profile} contents={contents} styles={styles} />
       </div>
 
-      <div className="split right">
+      <div className={`${classes.right} ${classes.split}`}>
         <AppBar position="static" color="default">
           <Tabs
             value={tab}
