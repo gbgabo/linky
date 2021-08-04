@@ -22,6 +22,8 @@ type profileType = {
   name: string;
   address: string | undefined;
   image: string;
+  display: boolean;
+  displayName: boolean;
 };
 
 type content = linkType | panelType | sectionType;
