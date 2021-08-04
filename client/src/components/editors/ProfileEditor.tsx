@@ -7,9 +7,12 @@ import {
   AccordionDetails,
   Grid,
   TextField,
-  IconButton,
+  Switch,
+  Button,
+  Box,
 } from "@material-ui/core";
-import { ExpandMore, AlternateEmail, AccountCircle } from "@material-ui/icons";
+import { AlternateEmail, AccountCircle } from "@material-ui/icons";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
     display: "flex",
     alignItems: "center",
-    flexBasis: "6%",
+    flexBasis: "35px",
   },
 }));
 
@@ -35,56 +38,90 @@ export default function ProfileEditor({
   onChange,
 }: ProfileEditorProps): ReactElement {
   const classes = useStyles();
-  const [isExpanded, setIsExpanded] = React.useState(false);
   return (
-    <div className={classes.root}>
-      <Accordion
-        elevation={3}
-        expanded={isExpanded}
-        onChange={() => setIsExpanded(!isExpanded)}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>
-            <AlternateEmail />
-          </Typography>
-          <Typography className={classes.heading}>Profile</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid container direction="row" alignItems="center" spacing={1}>
-            <Grid item xs={1}>
-              <IconButton>
-                <AccountCircle />
-              </IconButton>
-            </Grid>
-            <Grid item xs={5}>
-              <TextField
-                label="Username"
-                name={profile.name}
-                variant="outlined"
-                value={profile.name}
-                onChange={(e) => onChange({ ...profile, name: e.target.value })}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                label="Profile URL"
-                name={profile.address}
-                variant="outlined"
-                value={profile.address}
+    <Box p={1}>
+      <Grid container spacing={2} alignItems="stretch">
+        <Grid item xs={3}>
+          <Accordion elevation={2} expanded={profile.display}>
+            <AccordionSummary
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Switch
+                checked={profile.display}
                 onChange={(e) =>
-                  onChange({ ...profile, address: e.target.value })
+                  onChange({ ...profile, display: e.target.checked })
                 }
-                fullWidth
               />
-            </Grid>
-          </Grid>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+              <Typography className={classes.heading}>
+                <AccountCircle />
+              </Typography>
+              <Typography className={classes.heading}>Picture</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item xs={1}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Upload
+                  </Button>
+                </Grid>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
+        <Grid item xs={9}>
+          <Accordion elevation={2} expanded={profile.displayName}>
+            <AccordionSummary
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Switch
+                checked={profile.displayName}
+                onChange={(e) =>
+                  onChange({ ...profile, displayName: e.target.checked })
+                }
+              />
+              <Typography className={classes.heading}>
+                <AlternateEmail />
+              </Typography>
+              <Typography className={classes.heading}>Nickname</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item xs={4}>
+                  <TextField
+                    label="Username"
+                    name={profile.name}
+                    variant="outlined"
+                    value={profile.name}
+                    onChange={(e) =>
+                      onChange({ ...profile, name: e.target.value })
+                    }
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    label="Profile URL"
+                    name={profile.address}
+                    variant="outlined"
+                    value={profile.address}
+                    onChange={(e) =>
+                      onChange({ ...profile, address: e.target.value })
+                    }
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
