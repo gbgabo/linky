@@ -1,8 +1,8 @@
 import "fontsource-roboto";
 import React, { ReactElement, ChangeEvent } from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { Link, Section, Panel } from "../components/contents";
+import { Link, Section, Panel, Profile } from "../components/contents";
 import { StyleRules } from "@material-ui/styles/withStyles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
@@ -40,20 +40,7 @@ export default function Page({
         alignItems="center"
         spacing={1}
       >
-        <Grid item>
-          <img className={classes.profile} alt="profile" src={profile.image} />
-        </Grid>
-        <Grid item>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            style={{ textTransform: "lowercase" }}
-            href={profile.address}
-          >
-            {profile.name}
-          </Button>
-        </Grid>
+        <Profile content={profile} classes={classes} />
         {contents.map((content, index) => {
           let contentElement;
           contentElement =
