@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
     display: "flex",
     alignItems: "center",
-    flexBasis: "10%",
+    flexBasis: "5%",
   },
 }));
 
