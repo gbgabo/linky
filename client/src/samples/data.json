@@ -2,7 +2,9 @@
   "profile": {
     "name": "@gb_gabo",
     "address": "https://www.instagram.com/gb_gabo/",
-    "image": "https://avatars.githubusercontent.com/u/22304226?v=4"
+    "image": "https://avatars.githubusercontent.com/u/22304226?v=4",
+    "display": true,
+    "displayName": true
   },
   "contents": [
     {
@@ -39,15 +41,23 @@
     "page": {
       "--bg-colors": ["#900048", "#3D0D64", "#240041"],
       "--gradient-angle": "180deg",
-      "minHeight": "100vh",
+      "height": "100%",
       "display": "flex",
       "flexDirection": "column",
       "alignItems": "center",
       "justifyContent": "center",
-      "background": "linear-gradient(var(--gradient-angle), var(--bg-colors))"
+      "background": "linear-gradient(var(--gradient-angle), var(--bg-colors))",
+      "backgroundSize": "cover",
+      "backgroundPosition": "center",
+      "backgroundRepeat": "no-repeat",
+      "width": "100%",
+      "position": "absolute",
+      "zIndex": 1,
+      "top": "0",
+      "overflow-x": "hidden"
     },
     "profile": {
-      "maxWidth": "300px",
+      "maxWidth": "12rem",
       "borderRadius": "20%"
     },
     "profile-text": {
@@ -57,12 +67,12 @@
       "color": "#ffffff"
     },
     "panel": {
+      "minWidth": "20rem",
+      "maxWidth": "120px",
       "boxSizing": "border-box",
       "color": "#00ffb7",
       "borderRadius": "30px",
-      "boxShadow": "0 3px 5px 2px #000000",
       "fontSize": "0.875rem",
-      "maxWidth": "500px",
       "background": "#000000",
       "&:last-child": {
         "borderRadius": "30px"
@@ -82,9 +92,9 @@
       "borderRadius": "30px",
       "border": 0,
       "color": "#000000",
-      "height": 60,
       "boxShadow": "0 3px 5px 2px #000000",
-      "minWidth": "500px",
+      "height": 60,
+      "width": "20rem",
       "minHeight": "60px",
       "textTransform": "inherit",
       "alignItems": "center"
