@@ -1,15 +1,8 @@
 import React, { Fragment, ReactElement } from "react";
-import { Button } from "@material-ui/core";
-import Add from "@material-ui/icons/Add";
-import PlaylistAdd from "@material-ui/icons/PlaylistAdd";
-import PostAdd from "@material-ui/icons/PostAdd";
-import {
-  LinkEditor,
-  PanelEditor,
-  SectionEditor,
-  ProfileEditor,
-} from "./editors";
+import { ButtonEditorSection, ProfileEditor } from "./editors";
 import "../css/App.css";
+import IconEditorSection from "./editors/sections/IconEditorSection";
+import { Divider, Grid } from "@material-ui/core";
 
 interface ContentsProps {
   profile: profileType;
@@ -24,87 +17,25 @@ export default function Contents({
   onChange,
   onProfileChange,
 }: ContentsProps): ReactElement {
-  const handleContentChange = (value: string, id: number, type: string) => {
-    const updatedContents = contents.map((content, index) =>
-      index === id ? { ...content, [type]: value } : content
-    );
-
-    onChange(updatedContents);
-  };
-
-  const addContent = (type: string, newContent: content) => {
-    const updatedContents = [...contents, newContent];
-    onChange(updatedContents);
-  };
-
-  const removeContent = (id: number) => {
-    const updatedContents = contents.filter((content, index) => index !== id);
-    onChange(updatedContents);
-  };
-
   return (
     <Fragment>
-      <ProfileEditor profile={profile} onChange={onProfileChange} />
-
-      <form noValidate autoComplete="off">
-        {contents.map((content, index) => {
-          let Editor = LinkEditor;
-          Editor = content.type === "section" ? SectionEditor : Editor;
-          Editor = content.type === "panel" ? PanelEditor : Editor;
-
-          return (
-            <Editor
-              content={content}
-              index={index}
-              onChange={handleContentChange}
-              onRemove={removeContent}
-            />
-          );
-        })}
-        <div>
-          <Button
-            size="large"
-            onClick={() =>
-              addContent("link", {
-                icon: "link",
-                name: "link",
-                type: "link",
-                address: "http://duckduckgo.com",
-              })
-            }
-            startIcon={<Add />}
-          >
-            Link
-          </Button>
-          <Button
-            size="large"
-            onClick={() =>
-              addContent("section", {
-                icon: "link",
-                name: "section",
-                type: "section",
-              })
-            }
-            startIcon={<PlaylistAdd />}
-          >
-            Section
-          </Button>
-          <Button
-            size="large"
-            onClick={() =>
-              addContent("panel", {
-                icon: "link",
-                name: "panel",
-                type: "panel",
-                details: "Add more details here",
-              })
-            }
-            startIcon={<PostAdd />}
-          >
-            Panel
-          </Button>
-        </div>
-      </form>
+      <Grid container direction="column" alignContent="stretch" spacing={3}>
+        <Grid item>
+          <ProfileEditor profile={profile} onChange={onProfileChange} />
+        </Grid>
+        <Grid item>
+          <Divider />
+        </Grid>
+        <Grid item>
+          <ButtonEditorSection contents={contents} onChange={onChange} />
+        </Grid>
+        <Grid item>
+          <Divider />
+        </Grid>
+        <Grid item>
+          <IconEditorSection contents={contents} onChange={onChange} />
+        </Grid>
+      </Grid>
     </Fragment>
   );
 }

@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexBasis: "35px",
   },
+  button: {
+    height: "56px",
+  },
 }));
 
 interface ProfileEditorProps {
@@ -40,6 +43,7 @@ export default function ProfileEditor({
   const classes = useStyles();
   return (
     <Box p={1}>
+      <Typography variant="h5">Header</Typography>
       <Grid container spacing={2} alignItems="stretch">
         <Grid item xs={3}>
           <Accordion elevation={2} expanded={profile.display}>
@@ -59,18 +63,16 @@ export default function ProfileEditor({
               <Typography className={classes.heading}>Picture</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Grid container direction="row" alignItems="center" spacing={1}>
-                <Grid item xs={1}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    startIcon={<CloudUploadIcon />}
-                  >
-                    Upload
-                  </Button>
-                </Grid>
-              </Grid>
+              <Button
+                variant="contained"
+                fullWidth
+                className={classes.button}
+                color="primary"
+                size="large"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload
+              </Button>
             </AccordionDetails>
           </Accordion>
         </Grid>
