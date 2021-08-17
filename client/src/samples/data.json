@@ -15,25 +15,44 @@
     },
     {
       "icon": "call",
-      "type": "link",
+      "type": "icon",
       "name": "Whatsapp",
       "address": "https://web.whatsapp.com"
     },
     {
       "icon": "code",
-      "name": "Meus projetos",
-      "type": "section"
+      "type": "link",
+      "name": "Github",
+      "address": "https://github.com/gbgabo"
     },
     {
       "icon": "link",
       "type": "link",
-      "name": "Linky",
-      "address": "https://github.com/gbgabo/linky"
+      "name": "Linkedin",
+      "address": "https://github.com/gbgabo"
     },
     {
-      "icon": "code",
-      "type": "link",
+      "icon": "info",
       "name": "Tinytools",
+      "type": "icon",
+      "address": "https://github.com/TinyToolSH"
+    },
+    {
+      "icon": "whatsapp",
+      "name": "Tinytools",
+      "type": "icon",
+      "address": "https://github.com/TinyToolSH"
+    },
+    {
+      "icon": "alternate_email",
+      "name": "Tinytools",
+      "type": "icon",
+      "address": "https://github.com/TinyToolSH"
+    },
+    {
+      "icon": "tiktok",
+      "name": "Tinytools",
+      "type": "icon",
       "address": "https://github.com/TinyToolSH"
     }
   ],
@@ -65,6 +84,9 @@
     },
     "section": {
       "color": "#ffffff"
+    },
+    "iconLink": {
+      "color": "#00ffb7"
     },
     "panel": {
       "minWidth": "20rem",
