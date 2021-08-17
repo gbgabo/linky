@@ -18,6 +18,15 @@ type sectionType = {
   type: "section";
 };
 
+type iconType = {
+  icon: string;
+  name: string;
+  address: string;
+  type: "icon";
+};
+
+type icons = Array<iconType>;
+
 type profileType = {
   name: string;
   address: string | undefined;
@@ -26,5 +35,5 @@ type profileType = {
   displayName: boolean;
 };
 
-type content = linkType | panelType | sectionType;
+type content = linkType | panelType | sectionType | iconType;
 type contents = Array<content>;
