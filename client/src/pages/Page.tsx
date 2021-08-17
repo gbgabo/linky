@@ -1,8 +1,9 @@
 import "fontsource-roboto";
-import React, { ReactElement, ChangeEvent } from "react";
+import React, { ReactElement } from "react";
 import { Grid } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { Link, Section, Panel, Profile } from "../components/contents";
+import { Profile } from "../components/contents";
+import { ButtonSection, IconSection } from "../components/sections";
 import { StyleRules } from "@material-ui/styles/withStyles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
@@ -21,16 +22,12 @@ export default function Page({
   contents = contentsData,
   styles = stylesData,
 }: PageProps): ReactElement {
-  const [expandedPanel, setExpandedPanel] = React.useState(-1);
-
-  const handlePanelChange =
-    (panel: number) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
-      setExpandedPanel(isExpanded ? panel : -1);
-    };
-
   const useStyles = makeStyles((theme: Theme) => createStyles(styles));
   const classes = useStyles();
-
+  const buttons = contents.filter(
+    (content) => content.type !== "icon"
+  ) as contents;
+  const icons = contents.filter((content) => content.type === "icon") as icons;
   return (
     <div className={classes.page}>
       <Grid
@@ -41,34 +38,8 @@ export default function Page({
         spacing={1}
       >
         <Profile content={profile} classes={classes} />
-        {contents.map((content, index) => {
-          let contentElement;
-          contentElement =
-            content.type === "section" ? (
-              <Section content={content} classes={classes} />
-            ) : (
-              contentElement
-            );
-          contentElement =
-            content.type === "panel" ? (
-              <Panel
-                content={content}
-                classes={classes}
-                onChange={handlePanelChange(index)}
-                expanded={expandedPanel === index}
-              />
-            ) : (
-              contentElement
-            );
-          contentElement =
-            content.type === "link" ? (
-              <Link content={content} classes={classes} />
-            ) : (
-              contentElement
-            );
-
-          return <Grid item>{contentElement}</Grid>;
-        })}
+        <ButtonSection buttons={buttons} classes={classes} />
+        <IconSection icons={icons} classes={classes} />
       </Grid>
     </div>
   );
