@@ -6,6 +6,8 @@ const icons = [
   "info",
   "link",
   "call",
+  "download",
+  "cloud",
   "alternate_email",
   "extension",
   "add_circle",
@@ -13,6 +15,14 @@ const icons = [
   "qr_code",
   "add",
   "code",
+  "telegram",
+  "reddit",
+  "discord",
+  "pix",
+  "bookmarks",
+  "person",
+  "public",
+  "looks",
 ];
 
 interface IconPickerProps {
