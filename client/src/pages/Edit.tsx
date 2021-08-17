@@ -1,6 +1,5 @@
 import "fontsource-roboto";
 import React, { ReactElement, ChangeEvent } from "react";
-import "../css/App.css";
 import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { StyleRules } from "@material-ui/styles/withStyles";
 import { Palette, FormatAlignCenter, Brush } from "@material-ui/icons";
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   right: {
     right: 0,
-    backgroundColor: "#f4f1de",
+    backgroundColor: "#FAEBE0",
   },
 }));
 
@@ -53,7 +52,7 @@ export default function Edit(): ReactElement {
       </div>
 
       <div className={`${classes.right} ${classes.split}`}>
-        <AppBar position="static" color="default">
+        <AppBar position="sticky" color="default">
           <Tabs
             value={tab}
             onChange={handleTabChange}
