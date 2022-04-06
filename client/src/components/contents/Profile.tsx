@@ -23,9 +23,11 @@ export default function Profile({
         <Grid item>
           <Button
             variant="outlined"
-            color="primary"
             size="large"
-            style={{ textTransform: "lowercase" }}
+            classes={{
+              root: classes["profile-text"],
+              outlined: classes.outlined,
+            }}
             href={content.address}
           >
             {content.name}
