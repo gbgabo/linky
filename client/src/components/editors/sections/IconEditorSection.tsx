@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { IconLinkEditor } from "..";
-import { Button, Typography, Grid, Box, Paper } from "@material-ui/core";
+import { Button, Typography, Grid } from "@material-ui/core";
 import AddCircle from "@material-ui/icons/AddCircle";
 
 interface Props {
