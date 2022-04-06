@@ -18,7 +18,7 @@ export default function Link({ content, classes }: LinkProps): ReactElement {
           <Icon>{content.icon}</Icon>
         </Typography>
       )}
-      <Typography>{content.name}</Typography>
+      {content.name}
     </Button>
   );
 }

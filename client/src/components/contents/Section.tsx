@@ -12,13 +12,7 @@ export default function Section({
   classes,
 }: SectionProps): ReactElement {
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={2}
-    >
+    <Grid container direction="row" alignItems="center" spacing={2}>
       <Grid item>
         {content.icon === "none" ? null : (
           <Typography className={classes.section}>
@@ -27,9 +21,7 @@ export default function Section({
         )}
       </Grid>
       <Grid item>
-        <Typography>
-          <p className={classes.section}>{content.name}</p>
-        </Typography>
+        <p className={classes.section}>{content.name}</p>
       </Grid>
     </Grid>
   );

@@ -43,7 +43,7 @@ export default function Panel({
             <Icon>{content.icon}</Icon>
           </Typography>
         )}
-        <Typography>{content.name}</Typography>
+        {content.name}
       </AccordionSummary>
       <AccordionDetails>
         <p>{content.details}</p>
