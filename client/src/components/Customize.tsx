@@ -28,7 +28,8 @@ import {
   ProfileStyler,
   PanelStyler,
 } from "./stylers";
-import { CSSProperties, StyleRules } from "@material-ui/styles/withStyles";
+import { CSSProperties } from "@material-ui/styles/withStyles";
+import { useTheme } from "../context/Theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,17 +44,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type styles = StyleRules<{}, string>;
-
-interface CustomizeProps {
-  styles: styles;
-  onChange: (state: styles) => void;
-}
-
-export default function Customize({
-  styles,
-  onChange,
-}: CustomizeProps): ReactElement {
+export default function Customize(): ReactElement {
+  const { theme, updateTheme } = useTheme();
   const classes = useStyles();
   const [expandedMenu, setExpandedMenu] = React.useState(-1);
 
@@ -61,31 +53,27 @@ export default function Customize({
     {
       title: "Buttons",
       icon: <Storage />,
-      details: <ButtonStyler button={styles.button} onChange={handleStyle} />,
+      details: <ButtonStyler button={theme.button} onChange={updateTheme} />,
     },
     {
       title: "Background",
       icon: <CropOriginal />,
-      details: <BackgroundStyler page={styles.page} onChange={handleStyle} />,
+      details: <BackgroundStyler page={theme.page} onChange={updateTheme} />,
     },
     {
       title: "Profile",
       icon: <Person />,
-      details: (
-        <ProfileStyler profile={styles.profile} onChange={handleStyle} />
-      ),
+      details: <ProfileStyler profile={theme.profile} onChange={updateTheme} />,
     },
     {
       title: "Section",
       icon: <Info />,
-      details: (
-        <SectionStyler section={styles.section} onChange={handleStyle} />
-      ),
+      details: <SectionStyler section={theme.section} onChange={updateTheme} />,
     },
     {
       title: "Panel",
       icon: <Storage />,
-      details: <PanelStyler panel={styles.panel} onChange={handleStyle} />,
+      details: <PanelStyler panel={theme.panel} onChange={updateTheme} />,
     },
     {
       title: "Themes",
@@ -101,7 +89,7 @@ export default function Customize({
           <Grid item>
             <Button
               style={gradientButton as CSSProperties}
-              onClick={() => handleStyle("button", gradientButton)}
+              onClick={() => updateTheme("button", gradientButton)}
             >
               Mermaid
             </Button>
@@ -109,7 +97,7 @@ export default function Customize({
           <Grid item>
             <Button
               style={flatButton as CSSProperties}
-              onClick={() => handleStyle("button", flatButton)}
+              onClick={() => updateTheme("button", flatButton)}
             >
               Flat
             </Button>
@@ -117,7 +105,7 @@ export default function Customize({
           <Grid item>
             <Button
               style={materialButton as CSSProperties}
-              onClick={() => handleStyle("button", materialButton)}
+              onClick={() => updateTheme("button", materialButton)}
             >
               Material
             </Button>
@@ -131,14 +119,6 @@ export default function Customize({
     (panel: number) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
       setExpandedMenu(isExpanded ? panel : -1);
     };
-
-  function handleStyle(selector: string, rules = {}) {
-    const updatedStyles = {
-      ...styles,
-      [selector]: { ...styles[selector], ...rules },
-    };
-    onChange(updatedStyles);
-  }
 
   return (
     <div className={classes.root}>

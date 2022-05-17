@@ -4,19 +4,18 @@ import "../css/App.css";
 import IconEditorSection from "./editors/sections/IconEditorSection";
 import { Divider, Grid } from "@material-ui/core";
 
+import { useTheme } from "../context/Theme";
+
 interface ContentsProps {
   profile: profileType;
-  contents: contents;
-  onChange: (state: contents) => void;
   onProfileChange: (profile: profileType) => void;
 }
 
 export default function Contents({
   profile,
-  contents,
-  onChange,
   onProfileChange,
 }: ContentsProps): ReactElement {
+  const { contents, setContents } = useTheme();
   return (
     <Fragment>
       <Grid container direction="column" alignContent="stretch" spacing={3}>
@@ -27,13 +26,13 @@ export default function Contents({
           <Divider />
         </Grid>
         <Grid item>
-          <ButtonEditorSection contents={contents} onChange={onChange} />
+          <ButtonEditorSection contents={contents} onChange={setContents} />
         </Grid>
         <Grid item>
           <Divider />
         </Grid>
         <Grid item>
-          <IconEditorSection contents={contents} onChange={onChange} />
+          <IconEditorSection contents={contents} onChange={setContents} />
         </Grid>
       </Grid>
     </Fragment>

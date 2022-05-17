@@ -1,13 +1,10 @@
 import React, { ReactElement, Fragment } from "react";
-import { Slider, StyleRules } from "@material-ui/core";
+import { Slider } from "@material-ui/core";
 import { ColorPicker } from "../pickers";
-import { CreateCSSProperties, CSSProperties } from "@material-ui/styles";
-
-type styles = any;
 
 type BackgroundStylerProps = {
-  page: styles;
-  onChange: (selector: string, rules: styles) => void;
+  page: any;
+  onChange: (selector: string, rules: any) => void;
 };
 
 export default function BackgroundStyler({
@@ -19,7 +16,6 @@ export default function BackgroundStyler({
   }
 
   const handleBackgroundChange = (value: string | Array<string>) => {
-    console.log(`No customize: ${value}`);
     let backgroundStyle;
     value.length === 1
       ? (backgroundStyle = "var(--bg-colors)")
