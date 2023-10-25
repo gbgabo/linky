@@ -3,7 +3,7 @@ import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { Palette, FormatAlignCenter, Brush } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
-import * as data from "../samples/data.json";
+import data from "../samples/data.json";
 
 import TabPanel from "../components/TabPanel";
 import Customize from "../components/Customize";

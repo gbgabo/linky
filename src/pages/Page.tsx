@@ -3,7 +3,7 @@ import Home from "../components/Home";
 
 import ThemeProvider from "../context/Theme";
 
-import * as data from "../samples/data.json";
+import data from "../samples/data.json";
 interface PageProps {
   profile: profileType;
 }

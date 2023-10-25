@@ -3,7 +3,7 @@ import { StyleRules } from "@material-ui/styles/withStyles";
 import { makeStyles } from "@material-ui/core/styles";
 import { ClassNameMap } from "@material-ui/styles";
 
-import * as data from "../samples/data.json";
+import data from "../samples/data.json";
 
 type theme = StyleRules<{}, string>;
 type classes = ClassNameMap<any>;

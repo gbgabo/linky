@@ -1,9 +1,5 @@
 import React, { ReactElement, ChangeEvent } from "react";
-import {
-  gradientButton,
-  flatButton,
-  materialButton,
-} from "../samples/templates.json";
+import templates from "../samples/templates.json";
 import {
   Grid,
   Button,
@@ -31,13 +27,14 @@ import {
 import { CSSProperties } from "@material-ui/styles/withStyles";
 import { useTheme } from "../context/Theme";
 
+const { gradientButton, flatButton, materialButton } = templates;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
     display: "flex",
     alignItems: "center",
     flexBasis: "5%",
