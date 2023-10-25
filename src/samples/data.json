@@ -2,7 +2,7 @@
   "profile": {
     "name": "@gb_gabo",
     "address": "https://www.instagram.com/gb_gabo/",
-    "image": "https://gabo.link/profile.png",
+    "image": "https://raw.githubusercontent.com/gbgabo/gabo.link/dfe2e28af004822f95c4da6d416ecae2476ab90a/src/assets/images/profile_picture.png",
     "display": true,
     "displayName": true
   },
@@ -11,13 +11,19 @@
       "icon": "info",
       "name": "Sobre mim",
       "type": "panel",
-      "details": "Me chamo Gabriel Gaboardi, estudante de engenharia da computacao prestes a concluir o curso, fascinado em entender e analisar novas tecnologias e seus impactos num mundo de realidades que a humanidade jamais lidou antes"
+      "details": "Sou um desenvolvedor Front-End trabalhando com Laravel e desenvolvendo com frameworks full-stack como Next.js. Experiência em React e Typescript. Grande Fan de frameworks SSG como Astro."
     },
     {
-      "icon": "call",
+      "icon": "mail",
       "type": "icon",
-      "name": "Whatsapp",
-      "address": "https://web.whatsapp.com"
+      "name": "Email",
+      "address": "mailto:contact@gabo.link"
+    },
+    {
+      "icon": "public",
+      "type": "link",
+      "name": "Website",
+      "address": "https://gabo.link"
     },
     {
       "icon": "code",
@@ -26,34 +32,16 @@
       "address": "https://github.com/gbgabo"
     },
     {
-      "icon": "link",
+      "icon": "work",
       "type": "link",
       "name": "Linkedin",
-      "address": "https://github.com/gbgabo"
+      "address": "https://www.linkedin.com/in/gabriel-gaboardi/"
     },
     {
-      "icon": "info",
-      "name": "Tinytools",
+      "icon": "description",
+      "name": "Resume",
       "type": "icon",
-      "address": "https://github.com/TinyToolSH"
-    },
-    {
-      "icon": "whatsapp",
-      "name": "Tinytools",
-      "type": "icon",
-      "address": "https://github.com/TinyToolSH"
-    },
-    {
-      "icon": "alternate_email",
-      "name": "Tinytools",
-      "type": "icon",
-      "address": "https://github.com/TinyToolSH"
-    },
-    {
-      "icon": "tiktok",
-      "name": "Tinytools",
-      "type": "icon",
-      "address": "https://github.com/TinyToolSH"
+      "address": "https://www.gabo.link/cvs/gabriel-gaboardi-pt-BR.pdf"
     }
   ],
   "theme": {
@@ -77,7 +65,7 @@
     },
     "profile": {
       "maxWidth": "12rem",
-      "borderRadius": "20%"
+      "borderRadius": "40%"
     },
     "profile-text": {
       "color": "#00ffb7",
