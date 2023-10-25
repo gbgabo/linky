@@ -23,6 +23,11 @@ const icons = [
   "person",
   "public",
   "looks",
+  "work",
+  "mail",
+  "description",
+  "badge",
+  "home",
 ];
 
 interface IconPickerProps {
